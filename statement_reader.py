@@ -4,22 +4,25 @@ import time
 import numpy as np
 import csv
 
-def stat_reader(): 
-	infile = pd.read_csv(r"C:\Users\Phillipos Admasu\Documents\Statements\CSV\withdrawals.csv")
 
+df = pd.read_csv(r"C:\Users\Phillipos Admasu\Documents\Statements\CSV\withdrawals.csv")
+#df = pd.DataFrame(df)
 
+df['Date'] = pd.to_datetime(df['Date'])
 
-	statement_data = {'withdrawals':infile}
+df['Day'] = df['Date'].dt.weekday_name 
 
-
-	df = pd.DataFrame(data=statement_data)
-
-	print(df.to_string(index=False))
-
-
-
-
-
-
-
-
+print(df)
+ 
+ 
+ 
+ 
+ 
+ 
+# def main():
+#     while True:
+     
+#      values(df)
+ 
+# if __name__ == "__main__":
+# 	main()
