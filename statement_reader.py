@@ -6,13 +6,21 @@ import csv
 
 
 df = pd.read_csv(r"C:\Users\Phillipos Admasu\Documents\Statements\CSV\withdrawals.csv")
-#df = pd.DataFrame(df)
+df = pd.DataFrame(df)
 
 df['Date'] = pd.to_datetime(df['Date'])
 
-df['Day'] = df['Date'].dt.weekday_name 
+df['Day'] = df['Date'].dt.day_name()
 
-print(df)
+#The following line displays the most common day transactions were made.
+#It doesn't take into account the time transactions were made (Saturday night purchases technically are Sunday)
+cd = df['Day'].mode()[0]
+print("The most common day purchases were made is {}.".format(cd))
+ 
+ 
+#The following displays the total amount spent for each day.
+
+ 
  
  
  
