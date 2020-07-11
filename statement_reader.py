@@ -30,14 +30,11 @@ print('-'*40)
 #The following displays the total amount spent for each day.
 amount_sum = df.groupby('Day').Amount.sum()
 print('\nTotal Amount spent for each day:\n{}'.format(amount_sum))
+print('-'*40)
 
+#The following will display which items were most costly/common.
+totali = df.Item.value_counts()
+print('\nThe most common item(s) purchased are:\n', totali)
 
+#The following will combine items which are unnecessarily split. 
 
-
-# def main():
-#     while True:
-     
-#      values(df)
- 
-# if __name__ == "__main__":
-# 	main()
