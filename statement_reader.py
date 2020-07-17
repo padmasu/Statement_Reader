@@ -6,7 +6,7 @@ import csv
 
 
 df = pd.read_csv(r"C:\Users\Phillipos Admasu\Documents\Statements\CSV\withdrawals.csv")
-df = pd.DataFrame()
+df = pd.DataFrame(df).set_index('UID')
 print(df)
 df['Date'] = pd.to_datetime(df['Date'])
 
@@ -37,12 +37,12 @@ cd = df['Day'].mode()[0]
 # print('\nThe most common item(s) purchased are:\n', totali)
 
 #The following will combine items which are unnecessarily split. 
-df2 = pd.DataFrame.append(df[['Item', 'Amount']])
-df2 = df2.append(df, ignore_index = True)
+df2 = df[['Item', 'Amount']]
+
 df2['Item_type'] = pd.Series(dtype=str)
 
 
-# test = df2.loc[df2['Item'].str.contains('McDonalds')]
+# test = df2.loc[df2['Item'].str.contains("Mcdonald's")]
 
 
 
@@ -52,16 +52,17 @@ item=['McDonalds Denver', 'Sonoco', 'ATM Fee', 'Sonoco, Ft. Collins', 'McDonalds
 txn = [12.44, 4.00, 3.00, 14.99, 19.10, 52.99]
 #df = pd.DataFrame([item, txn]).T
 
-print(df2)
+#print(df2)
 
 
 # let's add an extra column to catch the conversions...
 #This will be df2['Item_type']***#df['item'] = pd.Series(dtype=str)
 
 # we'll use the "contains" function in pandas as a simple converter...  quick demo
-temp = df2.loc[df2['Item'].str.contains("McDonalds")]
+temp = df2.loc[df2['Item'].str.contains("Mcdonald's")]
+
 # print('\nitems that contain the string "McDonalds"')
-# print(temp)
+print(temp)
 
 # let's build a simple conversion table in a dictionary
 conversions = { 'McDonalds': 'McDonalds - any',
