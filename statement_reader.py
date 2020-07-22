@@ -7,7 +7,7 @@ import csv
 
 df = pd.read_csv(r"C:\Users\Phillipos Admasu\Documents\Statements\CSV\withdrawals.csv")
 df = pd.DataFrame(df).set_index('UID')
-print(df)
+#print(df)
 df['Date'] = pd.to_datetime(df['Date'])
 
 df['Day'] = df['Date'].dt.day_name()
@@ -38,51 +38,11 @@ cd = df['Day'].mode()[0]
 
 #The following will combine items which are unnecessarily split. 
 df2 = df[['Item', 'Amount']]
-
+df2['Item'] = df2['Item'].to_string()
+df2['Item'] = df2['Item'].str.lower()
 df2['Item_type'] = pd.Series(dtype=str)
 
+useri = input().lower()
+test = df2.loc[df2['Item'].str.contains(useri)]
 
-# test = df2.loc[df2['Item'].str.contains("Mcdonald's")]
-
-
-
-# print(test)
-
-item=['McDonalds Denver', 'Sonoco', 'ATM Fee', 'Sonoco, Ft. Collins', 'McDonalds, Boulder', 'Arco Boulder']
-txn = [12.44, 4.00, 3.00, 14.99, 19.10, 52.99]
-#df = pd.DataFrame([item, txn]).T
-
-#print(df2)
-
-
-# let's add an extra column to catch the conversions...
-#This will be df2['Item_type']***#df['item'] = pd.Series(dtype=str)
-
-# we'll use the "contains" function in pandas as a simple converter...  quick demo
-temp = df2.loc[df2['Item'].str.contains("Mcdonald's")]
-
-# print('\nitems that contain the string "McDonalds"')
-print(temp)
-
-# let's build a simple conversion table in a dictionary
-conversions = { 'McDonalds': 'McDonalds - any',
-                'Sonoco': 'gas',
-                'Arco': 'gas'}
-
-# let's loop over the orig items and put conversions into the new column
-# (there is probably a faster way to do this, but for data with < 100K rows, who cares.)
-# for key in conversions:
-#     df2['item'].loc[df2['item_orig'].str.contains(key)] = conversions[key]
-
-# # see how we did...
-# print('converted...')
-# print(df)
-
-# # now move over anything that was NOT converted
-# # in this example, this is just the ATM Fee item...
-# df['item'].loc[df['item'].isnull()] = df['item_orig']
-
-
-# # now we have decent labels to support grouping!
-# print('\n\n  *** sum of charges by group ***')
-# print(df.groupby('item')['charge'].sum())
+print(test)
